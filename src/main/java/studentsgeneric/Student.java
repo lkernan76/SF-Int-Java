@@ -1,4 +1,4 @@
-package studentsclean1;
+package studentsgeneric;
 
 import java.util.*;
 
@@ -39,13 +39,6 @@ public class Student {
 
   public Set<String> getCourses() {
     return courses;
-  }
-
-  // cheat this for primitives by using an array of a single primitive
-  public static CriterionOfStudent getSmartCriterion(/*final*/ double threshold) {
-    // "closure" -- java takes a copy, which must not be altered/mutate
-//    threshold++;
-    return s -> s.gpa > threshold;
   }
 
   @Override

@@ -7,6 +7,9 @@ import java.util.List;
 
 interface CriterionOfStudent {
   boolean test(Student s);
+  static CriterionOfStudent negate(CriterionOfStudent crit) {
+    return s -> !crit.test(s);
+  }
 }
 
 interface UseAStudent {
@@ -37,6 +40,17 @@ public class School {
     }
     return rv;
   }
+
+//  public static List<Something> selectSomethingByCriterion(
+//      List<Something> roster, CriterionOfSomething crit) {
+//    List<Something> rv = new ArrayList<>();
+//    for (Something s : roster) {
+//      if (crit.test(s)) {
+//        rv.add(s);
+//      }
+//    }
+//    return rv;
+//  }
 
   public static void main(String[] args) {
     List<Student> roster = new ArrayList<>(List.of(
@@ -95,5 +109,18 @@ public class School {
         System.out.println("Student: " + s.getName() + " takes "
             + s.getCourses().size() + " courses and has a grade of "
             + s.getGpa()));
+
+    System.out.println("Smart by built-in criterion");
+    CriterionOfStudent crit = Student.getSmartCriterion(3.5);
+    CriterionOfStudent opposite = CriterionOfStudent.negate(crit);
+    useAllStudents(
+        selectStudentsByCriterion(roster, crit),
+        s -> System.out.println("smart by own criterion: " + s));
+    System.out.println("Not smart by built-in criterion");
+    useAllStudents(
+        selectStudentsByCriterion(roster, s -> !crit.test(s)),
+        s -> System.out.println("smart by own criterion: " + s));
+    boolean x = true;
+//    boolean y = !crit;
   }
 }
