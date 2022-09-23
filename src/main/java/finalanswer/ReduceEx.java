@@ -39,7 +39,8 @@ public class ReduceEx {
 
     ThreadLocalRandom.current().doubles(100_000_000, -1, +1)
         .mapToObj(v -> new Average(v, 1))
-        .reduce(new Average(0, 0), (a1, a2) -> a1.merge(a2))
+//        .reduce(new Average(0, 0), (a1, a2) -> a1.merge(a2))
+        .reduce(new Average(0, 0), Average::merge)
         .get().ifPresent(a -> System.out.println("Average is " + a));
   }
 }

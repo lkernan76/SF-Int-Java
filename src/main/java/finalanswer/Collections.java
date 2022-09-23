@@ -24,7 +24,8 @@ public class Collections {
     );
 
     var results = listRoster.stream()
-        .collect(Collectors.groupingBy(s -> Collections.getLetterGrade(s)));
+//        .collect(Collectors.groupingBy(s -> Collections.getLetterGrade(s)));
+        .collect(Collectors.groupingBy(Collections::getLetterGrade));
 
     results.entrySet().stream()
         .forEach(e -> System.out.println("Students with grade " + e.getKey()
@@ -33,7 +34,8 @@ public class Collections {
     var results2 = listRoster.stream()
         .collect(Collectors.groupingBy(s -> Collections.getLetterGrade(s),
 //            Collectors.mapping(s -> s.getName(), Collectors.toList())
-            Collectors.mapping(s -> s.getName(), Collectors.joining(", "))
+//            Collectors.mapping(s -> s.getName(), Collectors.joining(", "))
+            Collectors.mapping(Student::getName, Collectors.joining(", "))
         ));
     results2.entrySet().stream()
         .forEach(e -> System.out.println("Students with grade " + e.getKey()
