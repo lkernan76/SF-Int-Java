@@ -39,7 +39,8 @@ public class Collections {
         .forEach(e -> System.out.println("Students with grade " + e.getKey()
             + " are " + e.getValue()));
 
-
+    int x;
+    int y;
 
   }
 }
